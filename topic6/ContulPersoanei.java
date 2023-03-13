@@ -50,8 +50,10 @@ public class ContulPersoanei {
 
     public void transferCatreOPersoana(float sumaTransferului, String destinatar) {
         System.out.println("Incercare transfer de " + sumaTransferului + " lei catre " + destinatar);
-        if (sumaTransferului > sumaCurenta || (destinatar.length() == 0)) {
+        if (sumaTransferului > sumaCurenta) {
             throw new ArithmeticException("Transfer esuat");
+        } else if (destinatar.length() == 0) {
+            throw new NullPointerException("Nume incomplet");
         } else {
             sumaCurenta = sumaCurenta - sumaTransferului;
             System.out.println("Sold ramas in cont dupa transfer este " + sumaCurenta + " lei");
@@ -63,6 +65,8 @@ public class ContulPersoanei {
         try {
             transferCatreOPersoana(sumaTransferului, destinatar);
         } catch (ArithmeticException e) {
+            System.out.println(e.toString());
+        } catch (NullPointerException e) {
             System.out.println(e.toString());
         }
     }
